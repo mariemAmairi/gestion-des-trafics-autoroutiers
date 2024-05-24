@@ -1,0 +1,60 @@
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title">liste des trafic autoroutiers</h4>
+          <div class=" card-body">
+            <div class=" table">
+                <table class=" table " id="">
+                    <thead class=" text-primary">
+                      <tr>
+                        <th scope="col">ID trafic</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Nom autoroute</th>
+                        <th scope="col">Classe autoroute</th>
+                        <th scope="col">gare de péage</th>
+                        <th scope="col">Type de passage</th>
+                        <th scope="col">Nombre</th>
+                        <!--th scope="col">Actions</th-->
+                        <button class="btn btn-outline-primary" (click)="goToAddTrafic()" >Ajouter un nouveau trafic</button>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor = "let trafic of trafics">
+                        <td>{{ trafic.id }} </td>
+                        <td>{{ trafic.date }} </td>
+                        <td>{{ trafic.nom_Autoroute }} </td>
+                        <td>{{ trafic.classe_Autouroute }} </td>
+                        <td>{{ trafic.gare_Peage }} </td>
+                        <td>{{ trafic.type_Passage}} </td>
+                        <td>{{ trafic.nombre}} </td>
+                        <td>
+                          
+                          <button class="btn btn-outline-primary" (click)="goToUpdateTrafic(trafic.id)">Modifier</button>
+                        </td>
+                        
+
+                      </tr>
+                        
+        
+                    </tbody>
+                </table>      
+                <!--button type="button" class="btn btn-primary" >Ajouter un nouveau trafic</button-->
+            </div>
+
+          </div>
+        </div>
+          
+        </div>  
+      </div>
+                 
+  
+          
+          
+    </div>
+</div>
+  
+     
+  
+  
