@@ -1,0 +1,49 @@
+package com.project.gestion.Controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import com.project.gestion.Modeles.TraficAutoroutier;
+import com.project.gestion.Services.TraficService;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:4200/#/trafic")
+public class TraficController {
+	@Autowired
+	private TraficService traficService;
+	
+	
+	  @PostMapping("/addTrafic")
+	   public TraficAutoroutier createTrafic(@RequestBody TraficAutoroutier trafic) {
+	   return traficService.createTrafic(trafic);
+	}
+	  @GetMapping("/traficList")
+	   public List<TraficAutoroutier> getAllTrafics() {
+	       return traficService.getAllTrafics();
+	   
+	}
+	  @GetMapping("/traficById/{id}")
+	   public ResponseEntity<TraficAutoroutier> getTraficById(@PathVariable(value = "id") int id) {
+	       Optional<TraficAutoroutier> trafic = traficService.getTraficById(id);
+	       if (trafic.isPresent()) {
+	           return new ResponseEntity<>(trafic.get(), HttpStatus.OK);
+	       } else {
+	           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	       }
+	  }
+	  @PutMapping("/updateTrafic/{id}")
+	   public TraficAutoroutier updateTrafic(@PathVariable("id") int id, @RequestBody TraficAutoroutier trafic) {
+	       return traficService.updateTrafic(id, trafic);
+	  }
+
+}

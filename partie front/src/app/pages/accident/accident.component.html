@@ -1,0 +1,56 @@
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title">liste des accidents autoroutiers</h4>
+          </div>
+          <div class=" card-body">
+            <div class=" table">
+                <table class=" table " id="">
+                    <thead class=" text-primary">
+                      <tr>
+                        <th scope="col">ID accident</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Nom autoroute</th>
+                        <th scope="col">Type accident</th>
+                        <th scope="col">Cause</th>
+                        <!--th scope="col">Actions</th-->
+                        <button class="btn btn-outline-primary" (click)="goToAddAccident()">Ajouter un nouveau accident</button>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor = "let accident of accidents">
+                        <td>{{ accident.id }} </td>
+                        <td>{{ accident.date }} </td>
+                        <td>{{ accident.nom_Autoroute }} </td>
+                        <td>{{ accident.type_Accident }} </td>
+                        <td>{{ accident.cause }} </td>
+                        <td>
+  
+                          <button class="btn btn-outline-primary" (click)="goToUpdateAccident(accident.id)">Modifier</button>
+                        </td>
+                       
+                        
+
+                      </tr>
+                        
+                        
+        
+                    </tbody>
+                </table>   
+                <!--button type="button" class="btn btn-primary" >Ajouter un nouveau accident</button-->   
+
+            </div>
+
+          </div>
+        </div>  
+    </div>
+               
+
+        
+        
+  </div>
+</div>
+

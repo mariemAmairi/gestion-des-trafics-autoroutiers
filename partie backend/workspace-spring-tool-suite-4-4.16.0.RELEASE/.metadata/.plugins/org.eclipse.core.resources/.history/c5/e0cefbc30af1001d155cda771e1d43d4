@@ -1,0 +1,88 @@
+package com.project.gestion.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+//import org.springframework.mail.SimpleMailMessage;
+//import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.project.gestion.Modeles.User;
+import com.project.gestion.Repository.UserRepo;
+import com.project.gestion.Services.GenerateLogin;
+import com.project.gestion.Services.GeneratePassword;
+
+
+@RestController
+public class AuthController {
+	@Autowired
+    private GenerateLogin loginGenerator;
+	@Autowired
+    private GeneratePassword passwordGenerator;
+	@Autowired
+	private UserRepo repo;
+	/*@Autowired
+	private JavaMailSender mailSender;*/
+	
+	
+	
+	@PostMapping (value ="/login")
+	 public ResponseEntity<?> loginUtilisateur(@RequestBody User User) { 
+		User exisitingUser= repo.findByLogin(User.getLogin());
+		if(exisitingUser != null) {
+			if(exisitingUser.getPassword().equals( (User.getPassword()))) {
+				return new ResponseEntity<>("Login successful", HttpStatus.OK);
+			}else {
+	                return new ResponseEntity<>("Invalid email or password", HttpStatus.BAD_REQUEST);
+			}
+		}else {
+			return new ResponseEntity<>("ERROR", HttpStatus.BAD_REQUEST);
+		}
+			
+		
+			
+				 
+		
+	}
+	
+	@GetMapping(path ="/test")
+	public String Test() {
+		return "test OK";
+	}
+	@PostMapping("/SignUp")
+	public ResponseEntity<?>SignUp(@RequestBody User user){
+		String login= loginGenerator.generateLogin(user.getNom(), user.getPrénom());
+		String password= passwordGenerator.generateRandomPassword();
+		User newUser = new User();
+        newUser.setNom(user.getNom());
+        newUser.setPrénom(user.getPrénom());
+        newUser.setEmail(user.getEmail());
+        newUser.setLogin(login);
+        newUser.setPassword(password);
+        newUser.setRole(user.getRole());
+       /* SimpleMailMessage mailMessage= new SimpleMailMessage();
+        mailMessage.setTo("mariem.amairi@etudiant-fsegt.utm.tn");
+        mailMessage.setSubject("Login et mot de passe");
+        mailMessage.setText("Bonjour,voici votre login et mot de passse");
+        mailMessage.setFrom("amairimaryem@gmail.com");
+        mailSender.send(mailMessage);
+        
+        System.out.println("mail sent succefully");*/
+        repo.save(newUser);
+       
+        return ResponseEntity.ok("Signup successful");
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	}
+	  
+

@@ -1,0 +1,47 @@
+package com.project.gestion.Services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.project.gestion.Modeles.TraficAutoroutier;
+import com.project.gestion.Repository.TraficRepo;
+
+import jakarta.persistence.EntityNotFoundException;
+
+@Service
+public class TraficService {
+	
+  @Autowired
+  private TraficRepo traficRepo;
+
+
+  public TraficAutoroutier createTrafic(TraficAutoroutier trafic) {
+    return traficRepo.save(trafic);
+
+}
+  public List<TraficAutoroutier> getAllTrafics() {
+    return traficRepo.findAll();
+}
+  public Optional<TraficAutoroutier> getTraficById(int id) {
+    return traficRepo.findById(id);
+}
+  public TraficAutoroutier updateTrafic(int id, TraficAutoroutier trafic) {
+    Optional<TraficAutoroutier> existingTrafic = traficRepo.findById(id);
+    if (existingTrafic.isPresent()) {
+        TraficAutoroutier updatedTrafic = existingTrafic.get();
+        updatedTrafic.setDate(trafic.getDate());
+        updatedTrafic.setNom_Autoroute(trafic.getNom_Autoroute());
+        updatedTrafic.setGare_Peage(trafic.getGare_Peage());
+        
+        updatedTrafic.setClasse_Autouroute(trafic.getClasse_Autouroute());
+        updatedTrafic.setType_Passage(trafic.getType_Passage());
+        return traficRepo.save(updatedTrafic);
+    } else {
+        throw new EntityNotFoundException("trafic not found with id " + id);
+    }
+  }
+}
+

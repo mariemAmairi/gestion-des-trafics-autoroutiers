@@ -1,0 +1,91 @@
+package com.project.gestion.Modeles;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+//import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+//import jakarta.persistence.JoinColumn;
+//import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+@Entity
+@Table(name="trafic_autoroutier")
+public class TraficAutoroutier {
+	
+
+	
+		@Id
+		@GeneratedValue (strategy = GenerationType.AUTO)
+		private int id;
+		@JsonFormat(pattern="dd/MM/yyyy")
+	    private  Date date;
+		@Column(name="Nom_Autoroute" , length=255)
+		private String Nom_Autoroute;
+		@Column(name="Gare_Péage" , length=255)
+		private String Gare_Peage;
+		@Column(name="Classe_Autoroute" , length=255)
+		private String Classe_Autouroute;
+		@Column(name="Type_Passage" , length=255)
+	    private String Type_Passage;
+		
+		
+		public TraficAutoroutier() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+		public TraficAutoroutier(int id, String nom_Autoroute, String gare_Peage, String classe_Autouroute,
+				String type_Passage, Date date) {
+			super();
+			this.id = id;
+			this.date = date; 
+			this.Nom_Autoroute = nom_Autoroute;
+			this.Gare_Peage = gare_Peage;
+			this.Classe_Autouroute = classe_Autouroute;
+			this.Type_Passage = type_Passage;
+			
+		}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getNom_Autoroute() {
+			return Nom_Autoroute;
+		}
+		public void setNom_Autoroute(String nom_Autoroute) {
+			Nom_Autoroute = nom_Autoroute;
+		}
+		public String getGare_Péage() {
+			return Gare_Peage;
+		}
+		public void setGare_Péage(String gare_Péage) {
+			Gare_Peage = gare_Péage;
+		}
+		public String getClasse_Autouroute() {
+			return Classe_Autouroute;
+		}
+		public void setClasse_Autouroute(String classe_Autouroute) {
+			Classe_Autouroute = classe_Autouroute;
+		}
+		public String getType_Passage() {
+			return Type_Passage;
+		}
+		public void setType_Passage(String type_Passage) {
+			Type_Passage = type_Passage;
+		}
+		public Date getDate() {
+			return date;
+		}
+		public void setDate(Date date) {
+			this.date = date;
+		}
+		
+		
+}
+
